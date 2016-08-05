@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="myApp">
+<head>
+    <title ng-bind="'Fastr - ' + details.Title"></title>
+    <link rel="stylesheet" href="public/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+</head>
+
+<body data-ng-controller="BodyController as body">
+    <div>
+        <h1>On the {{body.page}}</h1>
+        <button>
+            <a data-ng-click="body.fetch()">click me</a>
+        </button>
+    </div>
+
+    <script src="public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="public/bower_components/angular/angular.min.js"></script>
+    <script src="public/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/app.module.js"></script>
+</body>
+</html>
