@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-app="myApp">
+<html lang="en" data-ng-app="telecare">
 <head>
     <title ng-bind="'Fastr - ' + details.Title"></title>
     <link rel="stylesheet" href="public/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -8,18 +8,15 @@
     <meta charset="utf-8">
 </head>
 
-<body data-ng-controller="BodyController as body">
-    <div>
-        <h1>On the {{body.page}}</h1>
-        <button>
-            <a data-ng-click="body.fetch()">click me</a>
-        </button>
-    </div>
+<body>
+    
+    <ui-view></ui-view>
 
     <script src="public/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="public/bower_components/angular/angular.min.js"></script>
     <script src="public/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="public/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="js/app.module.js"></script>
 </body>
