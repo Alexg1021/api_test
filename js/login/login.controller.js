@@ -2,27 +2,55 @@
     'use strict';
     
     angular.module('telecare')
-        .controller('LoginController', function($http){
+        .controller('LoginController', function($http, $state){
             var vm = this;
-          vm.login = login;
+            vm.login = login;
+            vm.base64 = base64;
 
-          function login(creds){
-            $http.post('http://' + creds.username + ':' + creds.password + '@dev-telecarelive.pantheonsite.io/')
-            .then(function(res){
-              console.log(res);
-            });
-          }
-
-
-          //   $http.defaults.headers.common['Authorization'] = 'Basic Z3V0aWVycmV6Lmx4QGdtYWlsLmNvbTp1bmljb3Ju';
-
-          // function fetch(){
-          //   $http.get('http://dev-telecarelive.pantheonsite.io/api/v1/user')
-          //       .then(function(res){
-          //         console.log(res);
-          //         vm.person = res.data.data;
-          //       });
-          //     }
-
+              function login(creds){
+                var auth = vm.base64(creds.username + ':' + creds.password);
+                $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
+                $http.post('http://dev-telecarelive.pantheonsite.io/api/v1/auth')
+                    .then(function(res){
+                        if (res.err)return res.err;
+                        $state.go('body.dashboard');
+                    });
+              }
+              
+              function base64(input){
+                    var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+                    var output = "";
+                    var chr1, chr2, chr3 = "";
+                    var enc1, enc2, enc3, enc4 = "";
+                    var i = 0;
+          
+                    do {
+                        chr1 = input.charCodeAt(i++);
+                        chr2 = input.charCodeAt(i++);
+                        chr3 = input.charCodeAt(i++);
+          
+                        enc1 = chr1 >> 2;
+                        enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                        enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                        enc4 = chr3 & 63;
+          
+                        if (isNaN(chr2)) {
+                            enc3 = enc4 = 64;
+                        } else if (isNaN(chr3)) {
+                            enc4 = 64;
+                        }
+          
+                        output = output +
+                            keyStr.charAt(enc1) +
+                            keyStr.charAt(enc2) +
+                            keyStr.charAt(enc3) +
+                            keyStr.charAt(enc4);
+                        chr1 = chr2 = chr3 = "";
+                        enc1 = enc2 = enc3 = enc4 = "";
+                    } while (i < input.length);
+          
+                    return output;
+              }
+    
         });
 })();

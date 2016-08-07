@@ -1,0 +1,8 @@
+#main{
+    background-color: #333;
+    width: 100%;
+    height: 100vh;
+}
+#login h1, #login h3{
+    text-align: center;
+}
