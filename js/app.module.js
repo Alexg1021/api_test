@@ -18,15 +18,15 @@
           controller: 'BodyController',
           controllerAs: 'Body'
         })
-        .state('login', {
+        .state('body.login', {
           url: '/login',
           templateUrl: 'js/login/login.html',
           controller: 'LoginController',
           controllerAs: 'Login'
         })
-        .state('dashboard', {
+        .state('body.dashboard', {
           url: '/dashboard',
-          templateUrl: 'dashboard/dashboard.html',
+          templateUrl: 'js/dashboard/dashboard.html',
           controller: 'DashboardController',
           controllerAs: 'Dashboard'
         });
