@@ -1,44 +1,45 @@
 (function(){
     'use strict';
-    angular.module('telecare').factory('Users', UsersFactory);
+    angular.module('telecare').service('Users', UsersService);
         
-        UsersFactory.$inject = ['$http', '$state'];
+        UsersService.$inject = ['$http', '$state', 'storage', '$rootScope'];
         
-        function UsersFactory ($http){
-            return {
-               user: {},
-               getUserById: getUserById,
-               login: login,
-               base64: base64
-            };
+        function UsersService ($http, $state, storage, $rootScope){
+            var vm = this; 
+            vm.currentUser = null;
+            vm.currentUserToken = null;
+            vm.getUserById = getUserById;
+            vm.login = login;
+            vm.base64 = base64;
            
            /*
             * get user function 
             * returns {*}
             */
            function getUserById(userId){
-               var vm = this;
                return $http.get('path'+ userId)
                     .then(function(res){
                         if(res.err)return res.err;
-                        res.data = vm.user;
+                        res.data = vm.currentUser;
                     });
            }
            
           function login(creds){
-            var vm = this;
             var auth = vm.base64(creds.username + ':' + creds.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
             $http.post('http://dev-telecarelive.pantheonsite.io/api/v1/auth')
                 .then(function(res){
-                    vm.user = res.data.data;
+                    vm.currentUser = res.data.data;
+                    vm.currentUserToken = res.data.sid;
+                    $rootScope.currentUser = vm.currentUser;
+                    storage.set('token', res.data.sid);
+                    storage.set('currentUser', res.data.data);
                     $state.go('body.dashboard');
 
                 });
           }
           
            function base64(input){
-               var vm = this;
                 var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
                 var output = "";
                 var chr1, chr2, chr3 = "";
