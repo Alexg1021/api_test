@@ -13,23 +13,29 @@
        * Define our states
        */
       $stateProvider
-        .state('body', {
-          templateUrl: 'js/body/body.html',
-          controller: 'BodyController',
-          controllerAs: 'Body'
-        })
-        .state('body.login', {
-          url: '/login',
-          templateUrl: 'js/login/login.html',
-          controller: 'LoginController',
-          controllerAs: 'Login'
-        })
-        .state('body.dashboard', {
-          url: '/dashboard',
-          templateUrl: 'js/dashboard/dashboard.html',
-          controller: 'DashboardController',
-          controllerAs: 'Dashboard'
-        });
+        .state('login', {
+            url: '/login',
+            templateUrl: 'js/login/login.html',
+            controller: 'LoginController',
+            controllerAs: 'Login'
+          })
+          .state('body', {
+            templateUrl: 'js/body/body.html',
+            controller: 'BodyController',
+            controllerAs: 'Body'
+          })
+          .state('body.dashboard', {
+            url: '/dashboard',
+            templateUrl: 'js/dashboard/dashboard.html',
+            controller: 'DashboardController',
+            controllerAs: 'Dashboard'
+          })
+          .state('body.profile', {
+            url: '/user-profile',
+            templateUrl: 'js/profile/profile.html',
+            controller: 'ProfileController',
+            controllerAs: 'Profile'
+          });
       
     });
 

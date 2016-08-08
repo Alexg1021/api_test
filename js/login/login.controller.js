@@ -1,18 +1,25 @@
 (function(){
     'use strict';
     
-    angular.module('telecare')
-        .controller('LoginController', function($http, $state){
+    angular.module('telecare').controller('LoginController', LoginController); 
+    
+        LoginController.$inject = ['$http', '$state', 'UsersFactory'];
+        
+        function LoginController ($http, $state, UsersFactory){
             var vm = this;
             vm.login = login;
             vm.base64 = base64;
+            vm.errorLogin = false;
+            vm.user = {};
 
               function login(creds){
                 var auth = vm.base64(creds.username + ':' + creds.password);
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
                 $http.post('http://dev-telecarelive.pantheonsite.io/api/v1/auth')
                     .then(function(res){
-                        if (res.err)return res.err;
+                        if (res.err){
+                            return vm.errorLogin = true;
+                        }
                         $state.go('body.dashboard');
                     });
               }
@@ -52,5 +59,5 @@
                     return output;
               }
     
-        });
+        };
 })();

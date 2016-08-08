@@ -1,8 +1,23 @@
-<header>
+<div id='main'>
+    <header>
         <nav class="navbar navbar-default">
-            <h1>Header</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h1>Logo</h1>
+                    </div>
+                    <div class="col-md-4">
+                        <h1>Nav Menu Options</h1>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="tool-icons">
+                            <a data-ui-sref="body.profile"><i class="fa fa-user"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
-</header>
-<div class="container-fluid" id='main'>
+    </header>
+    
     <ui-view></ui-view>
 </div>

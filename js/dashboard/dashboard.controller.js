@@ -1,9 +1,11 @@
 (function(){
     'use strict';
     
-    angular.module('telecare')
-        .controller('DashboardController', function(){
+    angular.module('telecare').controller('DashboardController', DashboardController);
+        
+        DashboardController.$inject = [];
+    
+        function DashboardController(){
             var vm = this;
-           console.log('silvia smells'); 
-        });
+        };
 })();
