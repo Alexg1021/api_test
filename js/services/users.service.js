@@ -2,14 +2,15 @@
     'use strict';
     angular.module('telecare').service('Users', UsersService);
         
-        UsersService.$inject = ['$http', '$state', 'storage', '$rootScope'];
+        UsersService.$inject = ['$http', '$state', 'storage', '$rootScope', '$localStorage'];
         
-        function UsersService ($http, $state, storage, $rootScope){
+        function UsersService ($http, $state, storage, $rootScope, $localStorage){
             var vm = this; 
             vm.currentUser = null;
             vm.currentUserToken = null;
             vm.getUserById = getUserById;
             vm.login = login;
+            vm.logout = logout;
             vm.base64 = base64;
            
            /*
@@ -29,14 +30,22 @@
             $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
             $http.post('http://dev-telecarelive.pantheonsite.io/api/v1/auth')
                 .then(function(res){
+                    
                     vm.currentUser = res.data.data;
                     vm.currentUserToken = res.data.sid;
-                    $rootScope.currentUser = vm.currentUser;
-                    storage.set('token', res.data.sid);
-                    storage.set('currentUser', res.data.data);
+                    // $rootScope.currentUser = vm.currentUser;
+                    $localStorage.currentUser = {name: res.data.data.name, token: res.data.sid};
+                    $http.defaults.headers.common['NYTECHSID'] = res.data.sid;
                     $state.go('body.dashboard');
 
                 });
+          }
+          
+          function logout(){
+              // remove user from local storage and clear http auth header
+            delete $localStorage.currentUser;
+            $http.defaults.headers.common['NYTECHSID'] = '';
+            $state.go('login');
           }
           
            function base64(input){

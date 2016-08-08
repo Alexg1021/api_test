@@ -3,10 +3,11 @@
     
     angular.module('telecare')
         .controller('BodyController', BodyController);
-        BodyController.$inject = {};
+        BodyController.$inject = ['Users'];
         
-        function BodyController(){
+        function BodyController(Users){
            var vm = this;
+           vm.logout = Users.logout;
         
         };
 })();

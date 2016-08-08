@@ -1,7 +1,7 @@
 (function(){
   'use strict';
   
-  angular.module('telecare', ['ui.router', 'ui.bootstrap', 'ngSanitize'])
+  angular.module('telecare', ['ui.router', 'ui.bootstrap', 'ngSanitize', 'ngStorage'])
     .config(function($stateProvider, $urlRouterProvider){
       
       /**
@@ -37,8 +37,20 @@
             controllerAs: 'Profile'
           });
       
-    });
-
+    })
+      .run(function($rootScope, $http, $location, $localStorage){
+        if($localStorage.currentUser){
+          $http.defaults.headers.common.Authorization = $localStorage.currentUser.token;
+        }
+        
+        $rootScope.$on('$locationChangeStart', function(event, next, current){
+          var publicPages = ['/login'];
+          var restrictedPage = publicPages.indexOf($location.path()) === -1;
+          if(restrictedPage && !$localStorage.currentUser){
+            $location.path('/login');
+          }
+        })
+      });
  
 })();
 

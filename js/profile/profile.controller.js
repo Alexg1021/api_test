@@ -6,7 +6,7 @@
         
         function ProfileController(Users){
             var vm = this;
-            vm.user = Users.user;
+            vm.user = Users.currentUser;
             
             
         };
