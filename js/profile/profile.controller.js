@@ -2,15 +2,12 @@
     'use strict';
     angular.module('telecare').controller('ProfileController', ProfileController);
     
-    ProfileController.$inject = [];
+    ProfileController.$inject = ['Users'];
         
-        function ProfileController(){
+        function ProfileController(Users){
             var vm = this;
-            var user = {};
-            var getUserById = getUserById();
-            function getUserById(){
-                
-            }
+            vm.user = Users.user;
+            
             
         };
 })();

@@ -1,8 +1,8 @@
 (function(){
     'use strict';
-    angular.module('telecare').factory('UsersFactory', UsersFactory);
+    angular.module('telecare').factory('Users', UsersFactory);
         
-        UsersFactory.$inject = ['$http'];
+        UsersFactory.$inject = ['$http', '$state'];
         
         function UsersFactory ($http){
             return {
@@ -22,17 +22,18 @@
                     .then(function(res){
                         if(res.err)return res.err;
                         res.data = vm.user;
-                    })
+                    });
            }
            
           function login(creds){
-              var vm = this;
+            var vm = this;
             var auth = vm.base64(creds.username + ':' + creds.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
             $http.post('http://dev-telecarelive.pantheonsite.io/api/v1/auth')
                 .then(function(res){
-                    if (res.err)return res.err;
-                    return res.data = vm.user;
+                    vm.user = res.data.data;
+                    $state.go('body.dashboard');
+
                 });
           }
           
@@ -73,5 +74,5 @@
           }
            
            
-        };
-})
+        }
+})();
