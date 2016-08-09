@@ -34,13 +34,18 @@
             url: '/user-profile',
             templateUrl: 'js/profile/profile.html',
             controller: 'ProfileController',
-            controllerAs: 'Profile'
+            controllerAs: 'Profile',
+            resolve: {
+              user: function user(Users){
+                return Users.getUserById();
+              }
+            }
           });
       
     })
       .run(function($rootScope, $http, $location, $localStorage){
         if($localStorage.currentUser){
-          $http.defaults.headers.common.Authorization = $localStorage.currentUser.token;
+          $http.defaults.headers.common['NYTECHSID'] = $localStorage.currentUser.token;
         }
         
         $rootScope.$on('$locationChangeStart', function(event, next, current){

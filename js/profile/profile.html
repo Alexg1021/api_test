@@ -1,12 +1,56 @@
 <div id="profile">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <h1>User Options</h1>
-            </div>
-            <div class="col-md-8">
-                <h1>Hello, {{Profile.user.user_full_name}}!</h1>
+            <div class="page-title col-md-12">
+                <h1>User Profile</h1>
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-md-9">
+                <div class="profile-box">
+                    <div class="profile-greeting">
+                        <h2>Hello, {{Profile.user.user_full_name}}!</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="prof-pic-box">
+                            <a href="">
+                                <div class="prof-pic"></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                       <div class="user-info-table">
+                           <table class="table table-striped">
+                               <tbody>
+                                   <tr>
+                                       <td>User Full Name</td>
+                                       <td>{{Profile.user.user_full_name}}</td>
+                                   </tr>
+                                   <tr>
+                                       <td>Username</td>
+                                       <td>{{Profile.user.name}}</td>
+                                   </tr>
+                                   <tr>
+                                       <td>Email</td>
+                                       <td>{{Profile.user.mail}}</td>
+                                   </tr>
+                                   <tr>
+                                       <td>Birthdate</td>
+                                       <td>{{Profile.dateFormat(Profile.user.user_birthdate)}}</td>
+                                   </tr>
+                                   <tr>
+                                       <td>Contact Number</td>
+                                       <td>{{Profile.user.user_phone | tel}}</td>
+                                   </tr>
+                               </tbody>
+                           </table>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
     </div>
 </div>

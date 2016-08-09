@@ -6,7 +6,12 @@
         
         function ProfileController(Users){
             var vm = this;
-            vm.user = Users.currentUser;
+            vm.user = Users.user;
+            vm.dateFormat = dateFormat;
+            
+            function dateFormat(date){
+                return moment(date).format('M-DD-YYYY');
+            }
             
             
         };

@@ -8,35 +8,39 @@
             var vm = this; 
             vm.currentUser = null;
             vm.currentUserToken = null;
+            vm.user = {};
             vm.getUserById = getUserById;
             vm.login = login;
             vm.logout = logout;
+            vm.errorLogin = false;
             vm.base64 = base64;
            
            /*
             * get user function 
             * returns {*}
             */
-           function getUserById(userId){
-               return $http.get('path'+ userId)
+           function getUserById(){
+               return $http.get('http://dev-telecarelive.pantheonsite.io/api/v1/user')
                     .then(function(res){
                         if(res.err)return res.err;
-                        res.data = vm.currentUser;
+                         return vm.user = res.data.data;
                     });
            }
            
-          function login(creds){
+          function login(creds, callback){
             var auth = vm.base64(creds.username + ':' + creds.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
             $http.post('http://dev-telecarelive.pantheonsite.io/api/v1/auth')
                 .then(function(res){
-                    
-                    vm.currentUser = res.data.data;
-                    vm.currentUserToken = res.data.sid;
-                    // $rootScope.currentUser = vm.currentUser;
-                    $localStorage.currentUser = {name: res.data.data.name, token: res.data.sid};
-                    $http.defaults.headers.common['NYTECHSID'] = res.data.sid;
-                    $state.go('body.dashboard');
+                    debugger;
+                    if(res.data.status !== 200){
+                        return callback(false);
+                    }else{
+                        $http.defaults.headers.common['Authorization'] = '';
+                        $localStorage.currentUser = {name: res.data.data.name, token: res.data.sid};
+                        $http.defaults.headers.common['NYTECHSID'] = res.data.sid;
+                        return callback(true);
+                    }
 
                 });
           }

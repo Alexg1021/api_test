@@ -1,13 +1,25 @@
 #main{
     
 }
+
+h1, h2, h3{
+    margin: 0;
+}
+
 header{
     height: 80px;
+}
+header nav{
+    border-radius: 0!important;
+    color: #fff;
+}
+.logo{
+    padding-top: 15px;
 }
 
 .tool-icons{
     float: right;
-    padding: 15px 0;
+    padding: 15px 5px;
 }
 .tool-icons a{
     color: inherit;
@@ -46,4 +58,44 @@ header{
 .loginForm button{
     margin-top: 5px;
     width: 100px;
+}
+
+.loginError{
+    color: red;
+    text-align: center;
+}
+
+.page-title{
+    margin: 15px 0;
+}
+.page-title h1{
+    border-bottom: 2px solid #f1f1f1;
+}
+
+/*Profile Styles*/
+
+.profile-box{
+    position: absolute;
+    border: 2px solid #f1f1f1;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.profile-greeting{
+    background-color: #f1f1f1;
+    padding: 10px 5px;
+    margin-bottom: 20px;
+}
+
+.prof-pic-box{
+    width: 150px;
+    height: 150px;
+}
+
+.prof-pic{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background:url('../img/profile_pic.jpg') center ;
+    background-size: cover;
 }
