@@ -10,6 +10,7 @@
             vm.currentUserToken = null;
             vm.user = {};
             vm.getUserById = getUserById;
+            vm.editProfile = editProfile;
             vm.login = login;
             vm.logout = logout;
             vm.errorLogin = false;
@@ -23,16 +24,44 @@
                return $http.get('http://dev-telecarelive.pantheonsite.io/api/v1/user')
                     .then(function(res){
                         if(res.err)return res.err;
-                         return vm.user = res.data.data;
+                        return vm.user = res.data.data;
                     });
            }
+           
+           function editProfile(user){
+            var postData = 'myData='+JSON.stringify(user);
+                    
+            return $http({
+                url: 'http://dev-telecarelive.pantheonsite.io/api/v1/user',
+                method: 'POST',
+                data: $.param(user),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            }).then(function(res){
+                return _.merge(vm.user, user);
+            }, function(err){
+                console.error(err);
+            })
+           }
+           
+//           $http({
+//   url: 'myURL',
+//   method: "POST",
+//   data: $.param(data),
+//   headers: {
+//     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+//   }
+// })
+           
+           
+           
            
           function login(creds, callback){
             var auth = vm.base64(creds.username + ':' + creds.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
             $http.post('http://dev-telecarelive.pantheonsite.io/api/v1/auth')
                 .then(function(res){
-                    debugger;
                     if(res.data.status !== 200){
                         return callback(false);
                     }else{

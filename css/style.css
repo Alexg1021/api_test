@@ -5,6 +5,10 @@
 h1, h2, h3{
     margin: 0;
 }
+a{
+    color: inherit;
+    cursor: pointer;
+}
 
 header{
     height: 80px;
@@ -12,9 +16,14 @@ header{
 header nav{
     border-radius: 0!important;
     color: #fff;
+    background-color: #1b5faa!important;
 }
 .logo{
     padding-top: 15px;
+}
+.logo a:hover{
+    color: #ccc;
+    text-decoration: none;
 }
 
 .tool-icons{
@@ -34,16 +43,20 @@ header nav{
 .dashboard h1{
     text-align: center;
 }
+
 /*Login Page Styles*/
 #login{
-    background-color: lightblue;
+    background-color: #1b5faa;
     width: 100%;
     height: 100vh;
     position: fixed;
 }
 
 #login h1, #login h3{
+    
     text-align: center;
+    margin: 20px;
+    color: #fff;
 }
 
 #login .loginForm{
@@ -85,6 +98,11 @@ header nav{
     background-color: #f1f1f1;
     padding: 10px 5px;
     margin-bottom: 20px;
+    height: 50px;
+}
+
+.profile-greeting i{
+    font-size: 1.2em;
 }
 
 .prof-pic-box{
@@ -98,4 +116,30 @@ header nav{
     border-radius: 100%;
     background:url('../img/profile_pic.jpg') center ;
     background-size: cover;
+}
+
+/*Dashboard Styles*/
+.dash-box{
+    width: 100%;
+    height: auto;
+    border: 1px solid;
+    padding: 0 20px;
+}
+
+.dash-icon{
+        text-align: center;
+    padding: 60px 0;
+}
+
+.dash-icon i{
+    font-size: 5em;
+}
+
+.dash-title{
+    text-align: center;
+    border-top: 1px solid;
+    padding: 15px 0;
+}
+#dashboard .row{
+    margin-top: 20px;
 }

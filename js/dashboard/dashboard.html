@@ -1,7 +1,83 @@
-<div class="dashboard">
-    <div class="container-fluid">
-        <h1>Welcome to your Dashboard!</h1>
-        <button data-ng-click="Dashboard.clickMe()" class="btn-primary">Push Me</button>
+<div id="dashboard">
+    <div class="container">
+        <div class="row">
+            <h1>Dashboard</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <a data-ui-sref="body.message">
+                    <div class="dash-box">
+                        <div class="dash-icon">
+                            <i class="fa fa-envelope-o"></i>
+                        </div>
+                        <div class="dash-title">
+                            <h3>Message</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a data-ui-sref="body.message">
+                    <div class="dash-box">
+                        <div class="dash-icon">
+                            <i class="fa fa-medkit"></i>
+                        </div>
+                        <div class="dash-title">
+                            <h3>Doctor Tips</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a data-ui-sref="body.profile">
+                    <div class="dash-box">
+                        <div class="dash-icon">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="dash-title">
+                            <h3>User Profile</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-md-4">
+                <a data-ui-sref="body.message">
+                    <div class="dash-box">
+                        <div class="dash-icon">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <div class="dash-title">
+                            <h3>Text</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a data-ui-sref="body.message">
+                    <div class="dash-box">
+                        <div class="dash-icon">
+                            <i class="fa fa-cog"></i>
+                        </div>
+                        <div class="dash-title">
+                            <h3>Settings</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a data-ui-sref="body.profile">
+                    <div class="dash-box">
+                        <div class="dash-icon">
+                            <i class="fa fa-question"></i>
+                        </div>
+                        <div class="dash-title">
+                            <h3>FAQ</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
-    
 </div>

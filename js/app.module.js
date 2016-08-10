@@ -40,6 +40,17 @@
                 return Users.getUserById();
               }
             }
+          })
+          .state('body.conversations',{
+            url: '/conversations',
+            templateUrl: 'conversations/conversations.html',
+            controller: 'ConvoController',
+            controllerAs: 'Convos',
+            resolve: {
+              conversations: function conversations(Conversations){
+                return Conversations.getConvos();
+              }
+            }
           });
       
     })

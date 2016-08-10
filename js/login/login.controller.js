@@ -12,7 +12,6 @@
 
               function login(creds){
                   Users.login(creds, function(res){
-                      debugger;
                       if(res !== true){
                           vm.errorLogin = true;
                           return $state.go('login');
