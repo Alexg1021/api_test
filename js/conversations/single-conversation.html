@@ -1,0 +1,30 @@
+<div id="singleConvo">
+    <div class="row">
+        <div class="msg-input">
+            <div class="input-container">
+                <input  type="text" 
+                        data-ng-model="Convos.sendForm.message"
+                        data-ng-keypress="($event.which === 13)?Convos.postMessage():0"
+                        placeholder="Message" 
+                        ame="message"/>
+            </div>
+            <div class="msg-btns">
+                <div class="btn btn-default" data-ng-click="Convos.postMessage()">Send</div>
+                <div class="btn btn-primary" data-ng-if="Body.isDoctor == 1" data-ui-sref="body.consults({consultId: Convos.singleConvo.user_id})"><i class="fa fa-stethoscope"></i></div>
+            </div>
+        </div>
+        <div class="col-sm-12 messages_listed">
+            <div class="msgs" data-ng-repeat="msg in Convos.singleConvo.messages | orderBy: 'created': true">
+                <div class="card" data-ng-class="msg.uid === Body.userId ? 'me' : 'you'">
+					<div class="message_text">
+						{{msg.message_text}}
+					</div>
+					<div class="created">
+						{{Body.dateChange(msg.created) | date: 'short'}}
+					</div>
+					<span class="angle"></span>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

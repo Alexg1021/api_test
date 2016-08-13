@@ -1,0 +1,28 @@
+<div id="conversations">
+    <div class="container">
+        <div class="row title">
+            <h1><span data-ui-sref="body.conversations" style="cursor: pointer">Conversations</span></h1>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 msg-list">
+                <div data-ng-repeat="convo in Convos.conversations" class="msg-item" data-ui-sref="body.conversations.conversation({conversationId: convo.eid})">
+                    <div class="msg-img col-md-4">
+                        <a href="">
+                            <img src="{{convo.user_image}}"/>
+                        </a>
+                    </div>
+                    <div class="msg-content col-md-8">
+                        <div class="msg-name">{{convo.user_full_name}}</div>
+                        <div class="msg-number">555-555-5555</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 msg-section">
+                <data-ui-view></data-ui-view>
+            </div>
+        </div>
+        
+    </div>
+</div>

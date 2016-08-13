@@ -9,6 +9,7 @@
             vm.currentUser = null;
             vm.currentUserToken = null;
             vm.user = {};
+            vm.bodyUser = {};
             vm.getUserById = getUserById;
             vm.editProfile = editProfile;
             vm.login = login;
@@ -28,35 +29,31 @@
                     });
            }
            
+           /*
+            * edit user function 
+            * returns {*}
+            */
            function editProfile(user){
-            var postData = 'myData='+JSON.stringify(user);
-                    
-            return $http({
-                url: 'http://dev-telecarelive.pantheonsite.io/api/v1/user',
-                method: 'POST',
-                data: $.param(user),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                }
-            }).then(function(res){
-                return _.merge(vm.user, user);
-            }, function(err){
-                console.error(err);
-            })
+                var postData = 'myData='+JSON.stringify(user);
+                        
+                return $http({
+                    url: 'http://dev-telecarelive.pantheonsite.io/api/v1/user',
+                    method: 'POST',
+                    data: $.param(user),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
+                }).then(function(res){
+                    return _.merge(vm.user, user);
+                }, function(err){
+                    console.error(err);
+                })
            }
            
-//           $http({
-//   url: 'myURL',
-//   method: "POST",
-//   data: $.param(data),
-//   headers: {
-//     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-//   }
-// })
-           
-           
-           
-           
+           /*
+            * login function 
+            * returns {*}
+            */
           function login(creds, callback){
             var auth = vm.base64(creds.username + ':' + creds.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + auth;
@@ -66,14 +63,21 @@
                         return callback(false);
                     }else{
                         $http.defaults.headers.common['Authorization'] = '';
-                        $localStorage.currentUser = {name: res.data.data.name, token: res.data.sid};
+                        $localStorage.currentUser = {
+                            name: res.data.data.name, 
+                            token: res.data.sid, 
+                            doctor: res.data.data.doctor,
+                            uid: res.data.data.uid
+                        };
                         $http.defaults.headers.common['NYTECHSID'] = res.data.sid;
                         return callback(true);
                     }
-
                 });
           }
           
+          /*
+           *logout function
+           */
           function logout(){
               // remove user from local storage and clear http auth header
             delete $localStorage.currentUser;

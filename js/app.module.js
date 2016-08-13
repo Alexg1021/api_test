@@ -43,12 +43,45 @@
           })
           .state('body.conversations',{
             url: '/conversations',
-            templateUrl: 'conversations/conversations.html',
-            controller: 'ConvoController',
+            templateUrl: 'js/conversations/conversations.html',
+            controller: 'ConversationsController',
             controllerAs: 'Convos',
             resolve: {
               conversations: function conversations(Conversations){
-                return Conversations.getConvos();
+                return Conversations.getConversations();
+              }
+            }
+          })
+          .state('body.conversations.conversation', {
+            url: '/:conversationId',
+            templateUrl: 'js/conversations/single-conversation.html',
+            controller: 'ConversationsController',
+            controllerAs: 'Convos',
+            resolve: {
+              conversation: function conversation(Conversations, $stateParams){
+                return Conversations.getSingleConvo($stateParams.conversationId);
+              }
+            }
+          })
+          .state('body.consults',{
+            url: '/consults/:consultId/consult',
+            templateUrl: 'js/consults/consults.html',
+            controller: 'ConsultsController',
+            controllerAs: 'consultsCtrl',
+            resolve: {
+              consults: function consults(Consults, $stateParams){
+                return Consults.getConsults($stateParams.consultId);
+              }
+            }
+          })
+          .state('body.consults.consult', {
+            url: '/:consultEid',
+            templateUrl: 'js/consults/single-consult.html',
+            controller: 'ConsultsController',
+            controllerAs: 'consultsCtrl',
+            resolve: {
+              consult: function consult(Consults, $stateParams){
+                return Consults.getSingleConsult($stateParams.consultEid);
               }
             }
           });

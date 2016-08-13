@@ -1,0 +1,30 @@
+<div id="singleConvo">
+    <div class="row">
+        <div class="msg-input">
+            <div class="input-container">
+                <input  type="text" 
+                        data-ng-model="consultsCtrl.sendForm.message"
+                        data-ng-keypress="($event.which === 13)?consultsCtrl.postConsultMessage():0"
+                        placeholder="Message" 
+                        name="message"/>
+            </div>
+            <div class="msg-btns">
+                <div class="btn btn-default" data-ng-click="consultsCtrl.postConsultMessage()">Send</div>
+                <div class="btn btn-warning"><i class="fa fa-paperclip"></i></div>
+            </div>
+        </div>
+        <div class="col-sm-12 messages_listed">
+            <div class="msgs" data-ng-repeat="msg in consultsCtrl.consult.messages | orderBy: 'created': true">
+                <div class="card" data-ng-class="msg.uid === Body.userId ? 'me' : 'you'">
+					<div class="message_text">
+						{{msg.message_text}}
+					</div>
+					<div class="created">
+						{{Body.dateChange(msg.created) | date: 'short'}}
+					</div>
+					<span class="angle"></span>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

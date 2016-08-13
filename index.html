@@ -12,7 +12,8 @@
 <body>
     
     <ui-view></ui-view>
-
+    
+    <!--Package Modules-->
     <script src="public/bower_components/angular/angular.min.js"></script>
     <script src="public/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="public/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -22,16 +23,28 @@
     <script src="public/bower_components/lodash/dist/lodash.min.js"></script>  
     <script src="node_modules/ngstorage/ngStorage.min.js"></script>
     <script src="node_modules/moment/min/moment.min.js"></script>
+    
+    <!--Application Module-->
     <script src="js/app.module.js"></script>
+    
+    <!--Application Services-->
     <script src="js/services/users.service.js"></script>
     <script src="js/services/localStorage.service.js"></script>
+    <script src="js/services/conversations.service.js"></script>
+    <script src="js/services/consults.service.js"></script>
+    
+    <!--Application Filters-->
     <script src="js/filters/tel.filter.js"></script>
+    
+    <!--Application Controllers-->
     <script src="js/main.controller.js"></script>
     <script src="js/body/body.controller.js"></script>
     <script src="js/login/login.controller.js"></script>
     <script src="js/dashboard/dashboard.controller.js"></script>
     <script src="js/profile/profile.controller.js"></script>
     <script src="js/profile/modals/edit-profile.controller.js"></script>
+    <script src="js/conversations/conversations.controller.js"></script>
+    <script src="js/consults/consults.controller.js"></script>
     
 </body>
 </html>
