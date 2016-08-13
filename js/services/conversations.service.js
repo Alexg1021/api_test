@@ -36,8 +36,10 @@
             }
             
             function getSingleConvo(convoEid){
+                debugger;
                 return $http.get('http://dev-telecarelive.pantheonsite.io/api/v1/conversation/'+ convoEid + '/messages')
                     .then(function(res){
+                        debugger;
                         return vm.singleConvo = res.data.data;
                     }, function(err){
                         console.error(err);
